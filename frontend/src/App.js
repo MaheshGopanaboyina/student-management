@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import StudentList from "./components/StudentList";
 import StudentForm from "./components/StudentForm";
 import { Container, Navbar } from "react-bootstrap";
 
 function App() {
+    const [refreshTrigger, setRefreshTrigger] = useState(false);
+
+    // Function to refresh the student list
+    const refreshStudents = () => {
+        setRefreshTrigger(prev => !prev);
+    };
+
     return (
         <>
             <Navbar bg="dark" variant="dark" className="mb-4">
@@ -13,8 +20,8 @@ function App() {
             </Navbar>
 
             <Container>
-                <StudentForm />
-                <StudentList />
+                <StudentForm refreshStudents={refreshStudents} />
+                <StudentList refreshTrigger={refreshTrigger} />
             </Container>
         </>
     );

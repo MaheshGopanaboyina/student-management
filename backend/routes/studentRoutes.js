@@ -6,13 +6,14 @@ const router = express.Router();
 // Create Student
 router.post("/", async (req, res) => {
     try {
-        const student = new Student(req.body);
-        await student.save();
-        res.status(201).json(student);
+        const newStudent = new Student(req.body);
+        await newStudent.save();
+        res.status(201).json(newStudent);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 });
+
 
 // Get All Students
 router.get("/", async (req, res) => {
@@ -37,5 +38,6 @@ router.delete("/:id", async (req, res) => {
     await Student.findByIdAndDelete(req.params.id);
     res.json({ message: "Student deleted" });
 });
+
 
 module.exports = router;
